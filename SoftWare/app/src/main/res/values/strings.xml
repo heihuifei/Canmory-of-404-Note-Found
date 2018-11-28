@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">记忆罐头</string>
+    <string name="priority_1">显示全部优先级</string>
+    <string-array name="show_choose_priority">
+        <item>显示全部优先级</item>
+        <item>只显示高优先级</item>
+        <item>不显示低优先级</item>
+    </string-array>
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
+    <string name="datanum">16</string>
+    <string-array name="priority_low" textcolor="#fff">
+        <item>无</item>
+        <item>中</item>
+        <item>高</item>
+        <item>低</item>
+    </string-array>
+    <string-array name="priority">
+        <item>无</item>
+        <item>高</item>
+        <item>中</item>
+        <item>低</item>
+    </string-array>
+    <string-array name="advanced_time">
+        <item>不提醒</item>
+        <item>提前十分钟</item>
+        <item>提前30分钟</item>
+        <item>提前1小时</item>
+    </string-array>
+    <string-array name="remind_type">
+        <item>不提醒</item>
+        <item>闹铃</item>
+        <item>震动</item>
+        <item>闹铃加震动</item>
+    </string-array>
+    <string-array name="time">
+        <item>无</item>
+        <item>每周</item>
+        <item>每15天</item>
+        <item>每个月</item>
+    </string-array>
+    /string-array>
+    <string-array name="word_size">
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+    </string-array>
+    <string-array name="switch1">
+        <item>否</item>
+        <item>是</item>
+    </string-array>
+    <string-array name="word_color">
+        <item>红</item>
+        <item>绿</item>
+        <item>蓝</item>
+        <item>黑</item>
+    </string-array>
+    <string name="title_activity_about_canmemory">about_canmemory</string>
+    <string name="title_activity_delete_memo">delete_memo</string>
+    <string name="title_activity_test">test</string>
+</resources>
