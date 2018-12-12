@@ -21,24 +21,24 @@ public class MulAppWidgetProvider extends AppWidgetProvider {
     private RemoteViews mRemoteViews;
     private ComponentName mComponentName;
 
-    private int[] imgs = new int[]{
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher
-    };
+//    private int[] imgs = new int[]{
+//            R.mipmap.ic_launcher,
+//            R.mipmap.ic_launcher,
+//            R.mipmap.ic_launcher,
+//            R.mipmap.ic_launcher,
+//            R.mipmap.ic_launcher,
+//            R.mipmap.ic_launcher
+//    };
 
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.mul_app_widget_provider);
-        mRemoteViews.setImageViewResource(R.id.iv_test, R.mipmap.ic_launcher);
-        mRemoteViews.setTextViewText(R.id.btn_test, "点击跳转到Activity");
-        Intent skipIntent = new Intent(context, memo_add.class);
-        PendingIntent pi = PendingIntent.getActivity(context, 200, skipIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-        mRemoteViews.setOnClickPendingIntent(R.id.btn_test, pi);
+//        mRemoteViews.setImageViewResource(R.id.iv_test, R.mipmap.ic_launcher);
+//        mRemoteViews.setTextViewText(R.id.btn_test, "主页面");
+//        Intent skipIntent = new Intent(context, memo_add.class);
+//        PendingIntent pi = PendingIntent.getActivity(context, 200, skipIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+//        mRemoteViews.setOnClickPendingIntent(R.id.btn_test, pi);
 
         // 设置 ListView 的adapter。
         // (01) intent: 对应启动 ListViewService(RemoteViewsService) 的intent
@@ -72,10 +72,10 @@ public class MulAppWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if(TextUtils.equals(CHANGE_IMAGE,intent.getAction())){
-            Bundle extras = intent.getExtras();
-            int position = extras.getInt(ListViewService.INITENT_DATA);
+//            Bundle extras = intent.getExtras();
+//            int position = extras.getInt(ListViewService.INITENT_DATA);
             mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.mul_app_widget_provider);
-            mRemoteViews.setImageViewResource(R.id.iv_test, imgs[position]);
+//            mRemoteViews.setImageViewResource(R.id.iv_test, imgs[position]);
             mComponentName = new ComponentName(context, MulAppWidgetProvider.class);
             AppWidgetManager.getInstance(context).updateAppWidget(mComponentName, mRemoteViews);
         }
