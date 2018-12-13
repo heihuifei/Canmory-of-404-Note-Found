@@ -231,10 +231,12 @@
             android:background="@drawable/icon_tick"/>
         <TextView
             android:id="@+id/memo_add_test"
-            android:layout_width="275dp"
+            android:layout_width="180dp"
             android:layout_marginLeft="60dp"
             android:layout_height="50dp"
             android:textSize="16dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:gravity="center_vertical"
             android:paddingLeft="3dp"
             android:text="详情"/>
