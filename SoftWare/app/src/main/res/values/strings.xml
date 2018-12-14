@@ -25,6 +25,12 @@
         <item>高</item>
         <item>低</item>
     </string-array>
+    <string-array name="setting_use" textcolor="#fff">
+        <item>白</item>
+        <item>象牙白</item>
+        <item>粉白</item>
+
+    </string-array>
     <string-array name="priority">
         <item>无</item>
         <item>高</item>

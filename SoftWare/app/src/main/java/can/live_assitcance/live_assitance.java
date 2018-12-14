@@ -82,6 +82,7 @@ public class live_assitance extends AppCompatActivity {
     private String contentText;
     private static final int K = 3;
     private Switch  sw1,sw2,sw3,sw4,sw5,sw6,sw7;//天气预报按钮sw5，智能分析按钮sw7
+    private Switch sw8;//悬浮窗
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -116,6 +117,8 @@ public class live_assitance extends AppCompatActivity {
         weather[0]=user.getWeather_on();
         weather[1]=user.getParcel_priority();
         weather[2]=user.getParcel_paper();
+
+
 
         final String sdy[]={" "," "," "};
         /*
@@ -174,6 +177,7 @@ public class live_assitance extends AppCompatActivity {
         sw5=findViewById(R.id.switch10);
         sw6=findViewById(R.id.switch11);
         sw7=findViewById(R.id.switch12);
+        sw8=findViewById(R.id.xfc);
         /*
         * 对switch进行设置
         * */
