@@ -73,8 +73,8 @@ public class live_assitance extends AppCompatActivity {
     public AMapLocationClient mLocationClient = null;
     public AMapLocationListener mLocationListener = new live_assitance.MyAMapLocationListener();
     public AMapLocationClientOption mLocationOption = null;
-    String cityName;
-    private String API = "https://free-api.heweather.com/s6/weather?key=3888986748b04aa591001efe452dcd30&location=";
+    static String cityName;
+    private static String API = "https://free-api.heweather.com/s6/weather?key=3888986748b04aa591001efe452dcd30&location=";
     private String pckName;
     private String appName;
     private Long totalTime;
@@ -490,7 +490,10 @@ public class live_assitance extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    new live_assitance.MyWeather().execute(API + cityName);
+//                    new live_assitance.MyWeather().execute(API + cityName);
+                    //新增关于AlarmManager的代码
+                    Intent intent = new Intent(live_assitance.this, WeatherService.class);
+                    startService(intent);
                 }
             }
         });
@@ -567,7 +570,7 @@ public class live_assitance extends AppCompatActivity {
             }
         }
     }
-    class MyWeather extends AsyncTask<String, String, String> {
+    static class MyWeather extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             StringBuffer stringBuffer = null;
@@ -604,7 +607,7 @@ public class live_assitance extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s.equals("11")) {
-                Toast.makeText(live_assitance.this, "网络异常", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(live_assitance.this, "网络异常", Toast.LENGTH_SHORT).show();
             }
             try {
                 JSONObject object = new JSONObject(s);
@@ -881,5 +884,13 @@ public class live_assitance extends AppCompatActivity {
             goToSet();
             runSendNotify(contentText);
         }
+    }
+
+    public static String getAPI(){
+        return API;
+    }
+
+    public static String getCityName(){
+        return  cityName;
     }
 }
