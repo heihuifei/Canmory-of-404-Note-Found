@@ -140,12 +140,13 @@ public class Delete extends AppCompatActivity {
                         list.add(tmp2);
                     }
                 }
-
                 mgr.deletedone(list);
-                Intent self = new Intent(Delete.this,Delete.class);
-                startActivity(self);
-                Log.e("kkkkkkkkkk","kkkkkkkkkk");
+                iData.get(2);
                 myAdapter.notifyDataSetChanged();
+//                Intent self = new Intent(Delete.this,Delete.class);
+//                startActivity(self);
+                Log.e("kkkkkkkkkk","kkkkkkkkkk");
+
             }
         });
         delete_botton_back.setOnClickListener(new View.OnClickListener() {

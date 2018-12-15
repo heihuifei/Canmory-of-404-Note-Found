@@ -57,7 +57,7 @@ public class preview_picture extends AppCompatActivity {
         textView4=findViewById(R.id.textView4);
         textView5=findViewById(R.id.textView5);
         mgr=new DBManager(this);
-        ArrayList<Memo> list=mgr.returnmemo3(1);
+        ArrayList<Memo> list=mgr.returnmemo2(1);
         /*需要数据库返回带优先级的列表*/
 
         /*添加文字信息*/
