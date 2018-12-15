@@ -9,8 +9,13 @@ import android.widget.RemoteViewsService;
 import java.util.ArrayList;
 import java.util.List;
 
+import can.aboutsqlite.DBManager;
+import can.aboutsqlite.Memo;
+import can.sms.Appcontext;
+
 public class ListViewService extends RemoteViewsService {
     public static final String INITENT_DATA = "extra_data";
+    private DBManager mgr;
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -28,13 +33,28 @@ public class ListViewService extends RemoteViewsService {
         }
 
         @Override
-        public void onCreate() {
-            mList.add("一");
-            mList.add("二");
-            mList.add("三");
-            mList.add("四");
-            mList.add("五");
-            mList.add("六");
+        public void onCreate() {//插入备忘录的内容
+            mgr= new DBManager(ListViewService.this);
+            ArrayList<Memo> list=mgr.returnmemo2(1);
+            /*需要数据库返回带优先级的列表*/
+            /*添加文字信息*/
+//            String temp_s="   ";
+//            String use_0=list.get(0).getMemo_title()+temp_s+list.get(0).getmemo_dtimestring();
+//            String use_1=list.get(1).getMemo_title()+temp_s+list.get(1).getmemo_dtimestring();
+//            String use_2=list.get(2).getMemo_title()+temp_s+list.get(2).getmemo_dtimestring();
+//            String use_3=list.get(3).getMemo_title()+temp_s+list.get(3).getmemo_dtimestring();
+//            String use_4=list.get(4).getMemo_title()+temp_s+list.get(4).getmemo_dtimestring();
+
+            String use_0=list.get(0).getMemo_title();
+            String use_1=list.get(1).getMemo_title();
+            String use_2=list.get(2).getMemo_title();
+            String use_3=list.get(3).getMemo_title();
+            String use_4=list.get(4).getMemo_title();
+            mList.add(use_0);
+            mList.add(use_1);
+            mList.add(use_2);
+            mList.add(use_3);
+            mList.add(use_4);
         }
 
         @Override
@@ -55,7 +75,7 @@ public class ListViewService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int position) {
             RemoteViews views = new RemoteViews(mContext.getPackageName(), android.R.layout.simple_list_item_1);
-            views.setTextViewText(android.R.id.text1, "item:" + mList.get(position));
+            views.setTextViewText(android.R.id.text1, mList.get(position));
 
             Bundle extras = new Bundle();
             extras.putInt(ListViewService.INITENT_DATA, position);

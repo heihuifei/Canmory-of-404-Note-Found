@@ -61,7 +61,7 @@
             android:id="@+id/txt2"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="18dp"
             android:drawableLeft="@drawable/set"
             android:gravity="center"
@@ -70,6 +70,7 @@
 
         <Spinner
             android:id="@+id/spinner8"
+            android:entries="@array/setting_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/txt2"
@@ -78,12 +79,10 @@
             android:layout_marginTop="1dp" />
 
         <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="240dp"
+            android:layout_width="400dp"
             android:layout_height="10dp"
-            android:layout_below="@+id/txt2"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="-3dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
             android:background="@drawable/line1" />
     </RelativeLayout>
     <RelativeLayout
@@ -117,21 +116,21 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="30dp"
             android:drawableLeft="@drawable/key"
             android:text="修改密码" />
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="307dp"
             android:background="@drawable/icon_arrow"/>
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="240dp"
+            android:layout_width="400dp"
             android:layout_height="10dp"
-            android:layout_below="@+id/txt5"
-            android:layout_marginLeft="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
             android:background="@drawable/line1" />
     </RelativeLayout>
     <RelativeLayout
@@ -142,7 +141,7 @@
             android:id="@+id/button6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="@null"
             android:layout_marginLeft="150dp"
             android:text="关于记忆罐头"
             android:textColor="#000"

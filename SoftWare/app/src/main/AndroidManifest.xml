@@ -3,15 +3,15 @@
     package="can.memorycan">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -22,15 +22,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
+        android:name="can.sms.Appcontext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name ="can.sms.Appcontext"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -39,11 +38,10 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="fc406d65e7f72ee2d15a45fd30353492" />
+
         <service android:name="com.amap.api.location.APSService" />
-        <activity android:name="can.weather.Weather">
 
-        </activity>
-
+        <activity android:name="can.weather.Weather"></activity>
         <activity android:name="can.main_delete.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,8 +49,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity android:name="can.memo_add_details.memo_add_details" />
         <activity android:name=".setting.setting" />
 
@@ -82,12 +78,12 @@
         <activity android:name="can.main_delete.Delete" />
 
         <service android:name="can.sms.HelloService">
-            <intent-filter android:priority="1000" >
+            <intent-filter android:priority="1000">
                 <action android:name="can.sms.HelloService" />
             </intent-filter>
         </service>
         <service android:name="can.sms.TicketService">
-            <intent-filter android:priority="1000" >
+            <intent-filter android:priority="1000">
                 <action android:name="can.sms.TicketService" />
             </intent-filter>
         </service>
@@ -103,7 +99,14 @@
         </provider>
 
         <activity android:name="can.live_assitcance.live_assitance" />
-        <activity android:name="can.sliderbar.sliderbar"></activity>
+        <activity android:name="can.sliderbar.sliderbar" />
+
+        <service
+            android:name="can.live_assitcance.WeatherService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <receiver android:name="can.live_assitcance.AutoUpdateReceiver" ></receiver>
+
     </application>
 
 </manifest>
