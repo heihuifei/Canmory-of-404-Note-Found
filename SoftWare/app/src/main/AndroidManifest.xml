@@ -25,10 +25,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
-
 
     <application
         android:name="can.sms.Appcontext"
@@ -46,7 +45,7 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name="can.weather.Weather"></activity>
+        <activity android:name="can.weather.Weather" />
         <activity android:name="can.main_delete.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -109,8 +108,15 @@
         <service
             android:name="can.live_assitcance.WeatherService"
             android:enabled="true"
+            android:exported="true" />
+
+        <receiver android:name="can.live_assitcance.AutoUpdateReceiver" />
+
+        <service
+            android:name="can.live_assitcance.AppUsedService"
+            android:enabled="true"
             android:exported="true"></service>
-        <receiver android:name="can.live_assitcance.AutoUpdateReceiver" ></receiver>
+        <receiver android:name="can.live_assitcance.AutoUpdateReceiver0" />
 
     </application>
 
