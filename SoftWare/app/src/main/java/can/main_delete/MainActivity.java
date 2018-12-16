@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 detail.putExtra("memo_id",iData.get(groupPosition).get(childPosition).getMemo_id());
-                Log.e("memo_id",String.valueOf(iData.get(groupPosition).get(childPosition).getMemo_id()));
-                Log.e("KKKKKKLLLLLLLGGGGGG","KKKGGGFFFFF");
+//                Log.e("memo_id",String.valueOf(iData.get(groupPosition).get(childPosition).getMemo_id()));
+//                Log.e("KKKKKKLLLLLLLGGGGGG","KKKGGGFFFFF");
                 Bundle bundle = new Bundle();
                 bundle.putString("test","false");
                 detail.putExtras(bundle);
@@ -123,9 +123,7 @@ public class MainActivity extends AppCompatActivity {
         imagebotton_delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view)
             {
-                Log.e("kkkkkkkkkk","kkkkkkkkkk");
                 startActivity(delete);
-                Log.e("kkkkkkkkkk","kkkkkkkkkk");
             }
         });
         onePermission();
