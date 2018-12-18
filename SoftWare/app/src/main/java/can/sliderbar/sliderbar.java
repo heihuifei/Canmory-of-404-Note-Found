@@ -34,7 +34,7 @@ public class sliderbar extends AppCompatActivity {
         rb2.setOnClickListener(new toliveassitance());
         rb3.setOnClickListener(new towallpapergenerate());
         rb4.setOnClickListener(new tosetting());
-        rb5.setOnClickListener(new tomain());
+        rb5.setOnClickListener(new tologin());
     }
     private class tomain implements View.OnClickListener{
         @Override
@@ -61,6 +61,13 @@ public class sliderbar extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent=new Intent(sliderbar.this,can.memorycan.setting.setting.class);
+            startActivity(intent);
+        }
+    }
+    private class tologin implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(sliderbar.this,can.login.LoginActivity.class);
             startActivity(intent);
         }
     }
