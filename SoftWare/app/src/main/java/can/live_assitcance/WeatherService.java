@@ -9,7 +9,7 @@ import android.os.SystemClock;
 
 public class WeatherService extends Service {
 //    private int anHour =8*60*60*1000;// 这是8小时的毫秒数 为了少消耗流量和电量，8小时自动更新一次
-    private int anHour =60*1000;// 这是1分钟的毫秒数,1分钟自动更新一次
+    private int anHour = 24*60*60*1000;// 这是一天的毫秒数,1天自动更新一次
     private String API = live_assitance.getAPI();
     private String cityName = live_assitance.getCityName();
     public WeatherService() {

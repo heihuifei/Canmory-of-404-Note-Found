@@ -422,70 +422,69 @@ public class DBManager {
         return memolist;
     }
 
-//    /*返回主界面的已完成列表(memo中任务id任务标题到期时间有效)*/
-//    public ArrayList<Memo> returnmemo1(int user_id){
-//        String sql= "select * from "+TABLE2_NAME+" where user_id = "+user_id+" and memo_done= 1 order by memo_priority DESC,memo_dtime ASC";
-//        ArrayList<Memo> memolist = new ArrayList<Memo>();
-//        Cursor c = null;
-//        try{
-//            c = db.rawQuery(sql,null);
-//            while (c.moveToNext()) {
-//                long x=c.getLong((c.getColumnIndex("memo_dtime")));
-//                Date date = new Date(x);
-//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                String dtime=format.format(date);
-//                if(!judgedtime(dtime)){
-//                    Memo m = new Memo();
-//                    m.setMemo_title(c.getString((c.getColumnIndex("memo_title"))));
-//                    m.setMemo_dtime(x);
-//                    m.setMemo_id(c.getInt((c.getColumnIndex("memo_id"))));
-//                    memolist.add(m);
-//                }
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        finally {
-//            if (c!= null) {
-//                c.close();
-//            }
-//        }
-//        return memolist;
-//    }
+    /*返回主界面的已完成列表(memo中任务id任务标题到期时间有效)*/
     public ArrayList<Memo> returnmemo1(int user_id){
-    String sql= "select * from "+TABLE2_NAME+" where user_id = "+user_id+" order by memo_priority DESC,memo_dtime ASC";
-    ArrayList<Memo> memolist = new ArrayList<Memo>();
-    Cursor c = null;
-    try{
-        c = db.rawQuery(sql,null);
-        while (c.moveToNext()) {
-            if(c.getInt((c.getColumnIndex("memo_done")))==0) continue;
-
-            long x=c.getLong((c.getColumnIndex("memo_dtime")));
-            Date date = new Date(x);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String dtime=format.format(date);
-
-            if(judgedtime(dtime)){
-                Memo m = new Memo();
-                m.setMemo_title(c.getString((c.getColumnIndex("memo_title"))));
-                m.setMemo_dtime(x);
-                m.setMemo_id(c.getInt((c.getColumnIndex("memo_id"))));
-                memolist.add(m);
+        String sql= "select * from "+TABLE2_NAME+" where user_id = "+user_id+" and memo_done= 1 order by memo_priority DESC,memo_dtime ASC";
+        ArrayList<Memo> memolist = new ArrayList<Memo>();
+        Cursor c = null;
+        try{
+            c = db.rawQuery(sql,null);
+            while (c.moveToNext()) {
+                long x=c.getLong((c.getColumnIndex("memo_dtime")));
+                Date date = new Date(x);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dtime=format.format(date);
+                if(!judgedtime(dtime)){
+                    Memo m = new Memo();
+                    m.setMemo_title(c.getString((c.getColumnIndex("memo_title"))));
+                    m.setMemo_dtime(x);
+                    m.setMemo_id(c.getInt((c.getColumnIndex("memo_id"))));
+                    memolist.add(m);
+                }
             }
         }
-    }
-    catch (Exception e) {
-        e.printStackTrace();
-    }
-    finally {
-        if (c!= null) {
-            c.close();
+        catch (Exception e) {
+            e.printStackTrace();
         }
+        finally {
+            if (c!= null) {
+                c.close();
+            }
+        }
+        return memolist;
     }
-    return memolist;
-}
+//    public ArrayList<Memo> returnmemo1(int user_id){
+//    String sql= "select * from "+TABLE2_NAME+" where user_id = "+user_id+" order by memo_priority DESC,memo_dtime ASC";
+//    ArrayList<Memo> memolist = new ArrayList<Memo>();
+//    Cursor c = null;
+//    try{
+//        c = db.rawQuery(sql,null);
+//        while (c.moveToNext()) {
+//            if(c.getInt((c.getColumnIndex("memo_done")))==0) continue;
+//            long x=c.getLong((c.getColumnIndex("memo_dtime")));
+//            Date date = new Date(x);
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String dtime=format.format(date);
+//
+//            if(judgedtime(dtime)){
+//                Memo m = new Memo();
+//                m.setMemo_title(c.getString((c.getColumnIndex("memo_title"))));
+//                m.setMemo_dtime(x);
+//                m.setMemo_id(c.getInt((c.getColumnIndex("memo_id"))));
+//                memolist.add(m);
+//            }
+//        }
+//    }
+//    catch (Exception e) {
+//        e.printStackTrace();
+//    }
+//    finally {
+//        if (c!= null) {
+//            c.close();
+//        }
+//    }
+//    return memolist;
+//}
 
     /*判断时间是否过期*/
     public boolean judgedtime(String dtime){
