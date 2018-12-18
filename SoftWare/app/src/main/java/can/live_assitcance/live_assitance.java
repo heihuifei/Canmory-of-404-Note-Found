@@ -177,7 +177,7 @@ public class live_assitance extends AppCompatActivity {
         sw5=findViewById(R.id.switch10);
         sw6=findViewById(R.id.switch11);
         sw7=findViewById(R.id.switch12);
-        sw8=findViewById(R.id.xfc);
+        sw8=findViewById(R.id.window);
         /*
         * 对switch进行设置
         * */
