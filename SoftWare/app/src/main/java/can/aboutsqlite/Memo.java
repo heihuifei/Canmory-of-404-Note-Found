@@ -118,10 +118,19 @@ public class Memo {
     }
 
     public String getmemo_dtimestring(){
+<<<<<<< HEAD
 //        if(memo_dtime=="9999-12-01")
 //            memo_dtime="";if(memo_dtime=="9999-12-01")
 ////            memo_dtime="";
         return memo_dtime;
+=======
+        if(memo_dtime == "9999-12-01 12:12:12")
+        {
+            return "";
+        }
+        else
+            return memo_dtime;
+>>>>>>> f61b24faca3c87880330127b12d0ac434d2e159f
     }
 
     public void setMemo_dtimestring(String memo_dtime){

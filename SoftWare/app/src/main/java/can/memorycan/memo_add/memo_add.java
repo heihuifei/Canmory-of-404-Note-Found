@@ -169,7 +169,7 @@ public class memo_add extends AppCompatActivity{
             currentTime.setText(temp_memo.getmemo_dtimestring());
         }
         else {
-            String SSSS="9999-12-01 12:12";
+            String SSSS="9999-12-01 12:12:12";
             currentTime.setText(SSSS);
         }
 

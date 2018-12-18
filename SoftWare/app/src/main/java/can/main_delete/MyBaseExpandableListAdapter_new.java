@@ -235,4 +235,5 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
         private TextView tv_name;
         private CheckBox ckb_name;
     }
+
 }
