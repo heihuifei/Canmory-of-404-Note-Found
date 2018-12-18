@@ -14,7 +14,7 @@ import android.support.annotation.RequiresApi;
 
 public class AppUsedService extends Service {
     //    private int anHour =8*60*60*1000;// 这是8小时的毫秒数 为了少消耗流量和电量，8小时自动更新一次
-    private int anHour =60*1000;// 这是1分钟的毫秒数,1分钟自动更新一次
+    private int anHour = 14*24*60*60*1000;// 这是2周的毫秒数,2周自动更新一次
     private String contentText = live_assitance.getContentText();
     @Override
     public IBinder onBind(Intent intent) {
