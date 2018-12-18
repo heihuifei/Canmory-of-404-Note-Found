@@ -118,6 +118,9 @@ public class Memo {
     }
 
     public String getmemo_dtimestring(){
+//        if(memo_dtime=="9999-12-01")
+//            memo_dtime="";if(memo_dtime=="9999-12-01")
+////            memo_dtime="";
         return memo_dtime;
     }
 
@@ -133,8 +136,6 @@ public class Memo {
         else
             this.memo_dtime=format.format(date);
     }
-
-
 
     /*memo_priority*/
     public int getMemo_priority() {

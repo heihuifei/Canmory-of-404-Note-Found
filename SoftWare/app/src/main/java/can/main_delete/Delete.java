@@ -77,26 +77,22 @@ public class Delete extends AppCompatActivity {
         list_memo.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                detail.putExtra("memo_id",iData.get(groupPosition).get(childPosition).getMemo_id());
-//                Log.e("kkkkkkkkkk","kkkkkkkkkk");
-//                startActivity(detail);
-//                Log.e("jjjjjjjjjjj","jjjjjjjjjj");
                 List<Integer> list = new ArrayList();
                 for(int i=0;i<iData.get(2).size();i++)
                 {
                     if(myAdapter.getIsSelected2().get(i))
                     {
                         long tmp1 = iData.get(groupPosition).get(childPosition).getMemo_id();
-                        Log.e("KKKKKLLLLL","LLLLLLKKKKKK");
-                        Log.e("NumNumNum",String.valueOf(tmp1));
                         int tmp2 = new Long(tmp1).intValue();
                         list.add(tmp2);
+                        System.out.println(tmp2);
                     }
                 }
                 mgr.deletedone(list);
-//                Intent self = new Intent(Delete.this,Delete.class);
-//                startActivity(self);
-                Log.e("kkkkLLLLL","kkkkkLLLLL");
+                for(int i=0;i<list.size();i++)
+                {
+                    System.out.println(list.get(i));
+                }
                 myAdapter.notifyDataSetChanged();
                 return true;
             }
@@ -110,7 +106,6 @@ public class Delete extends AppCompatActivity {
                     for(int i=0;i<iData.get(2).size();i++)
                     {
                         myAdapter.getIsSelected2().put(i,true);
-                        Log.e("Is true!",String.valueOf(isChecked));
                         myAdapter.notifyDataSetChanged();
                     }
                 }
@@ -119,7 +114,6 @@ public class Delete extends AppCompatActivity {
                     for(int i=0;i<iData.get(2).size();i++)
                     {
                         myAdapter.getIsSelected2().put(i,false);
-                        Log.e("Is true!",String.valueOf(isChecked));
                         myAdapter.notifyDataSetChanged();
                     }
                 }
@@ -138,13 +132,13 @@ public class Delete extends AppCompatActivity {
                         Log.e("NumNumNum",String.valueOf(tmp1));
                         int tmp2 = new Long(tmp1).intValue();
                         list.add(tmp2);
+                        System.out.println(tmp2);
                     }
                 }
-
-                mgr.deletedone(list);
+                //删除直接删除该用户id的所有已完成备忘录的列表
+                mgr.deletedone(1);
                 Intent self = new Intent(Delete.this,Delete.class);
                 startActivity(self);
-                Log.e("kkkkkkkkkk","kkkkkkkkkk");
                 myAdapter.notifyDataSetChanged();
             }
         });

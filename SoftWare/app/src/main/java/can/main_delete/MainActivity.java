@@ -18,6 +18,7 @@ import com.example.baiduspeechdialog.dialog.SpeechBottomSheetDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import can.aboutsqlite.DBManager;
 import can.aboutsqlite.Memo;
@@ -62,10 +63,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final DBManager mgr = new DBManager(this);
-//        Memo memo=new Memo("软工say bye bye!",
-//                "2018-11-30 23:00:00",2,0,0,
-//                0, 1,1,1,"：）");
-//        mgr.insert_Memo(memo);
 
         mContext = MainActivity.this;
 
@@ -74,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         imagebotton_add=findViewById(R.id.imageButton_add);
         imagebotton_add.setOnClickListener(new tomemoadd());
-
 
         list_memo = (ExpandableListView) findViewById(R.id.list_memo);
         imagebotton_slide = (ImageButton) findViewById(R.id.imageButton_slide);
@@ -110,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
         list_memo.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                List<Integer> list = new ArrayList();
                 detail.putExtra("memo_id",iData.get(groupPosition).get(childPosition).getMemo_id());
-//                Log.e("memo_id",String.valueOf(iData.get(groupPosition).get(childPosition).getMemo_id()));
-//                Log.e("KKKKKKLLLLLLLGGGGGG","KKKGGGFFFFF");
+                Log.e("title_strings",iData.get(groupPosition).get(childPosition).getMemo_title());
                 Bundle bundle = new Bundle();
                 bundle.putString("test","false");
                 detail.putExtras(bundle);
@@ -120,6 +116,21 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        list_memo.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                List<Integer>dele=new ArrayList<Integer>();
+                dele = myAdapter.getGroup(groupPosition);
+                mgr.deletedone(dele);
+                for(int i=0;i<dele.size();i++)
+                {
+                    int id=dele.get(i);
+                    Memo memo=mgr.returnamemo(id);
+                    mgr.insert_Memo(memo);
+                }
+            }
+        });
+
         imagebotton_delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view)
             {
@@ -144,14 +155,14 @@ public class MainActivity extends AppCompatActivity {
                                 0, 1,1,0,"：）");
                         Log.e("insert","insert");
                         mgr.insert_Memo(memo);
-                        Intent self = new Intent(MainActivity.this,MainActivity.class);
-                        startActivity(self);
+                        iData.get(0).add(memo);
+                        myAdapter.notifyDataSetChanged();
                     }
                 });
                 speechBottomSheetDialog.show(getSupportFragmentManager(), TAG);
             }
         });
-        handle.postDelayed(runnable,1000*5);
+//        handle.postDelayed(runnable,1000*5);
     }
     protected void onDestroy(){
         handle.removeCallbacks(runnable);
@@ -174,10 +185,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(String title) {
                         //填充到输入框中
-//                        mResultTv.setText(title);
-                        Memo memo = new Memo(title,
-                                "2018-11-14 23:00:00",2,0,0,
-                                0, 1,1,0,"：）");
                     }
                 });
                 speechBottomSheetDialog.show(getSupportFragmentManager(), TAG);

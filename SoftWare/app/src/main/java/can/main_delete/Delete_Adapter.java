@@ -144,13 +144,12 @@ public class Delete_Adapter extends BaseExpandableListAdapter {
         ViewHolderItem itemHolder;
         convertView = null;
         if(convertView == null){
-            Log.e("groupposition",String.valueOf(convertView));
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.delete_memo_item, parent, false);
             itemHolder = new ViewHolderItem();
             itemHolder.ckb_name = (CheckBox) convertView.findViewById(R.id.delete_ckb_name_new);
             itemHolder.tv_name = (TextView) convertView.findViewById(R.id.delete_tv_name_new);
-            if(groupPosition == 2 && gData.get(groupPosition).get_memo_done()==0 && iData.get(groupPosition).get(childPosition).getMemo_id() > 100) {
+            if(groupPosition == 2) {
                 Log.e("groupposition",String.valueOf(groupPosition));
                 itemHolder.ckb_name.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             }
