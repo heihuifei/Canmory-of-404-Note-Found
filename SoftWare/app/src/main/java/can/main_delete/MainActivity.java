@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mResultTv;
     private ArrayList<Group_new> gData = null;
     private ArrayList<ArrayList<Memo>> iData = null;
-    private ArrayList<Memo> lData1 = null;
-    private ArrayList<Memo> lData2 = null;
-    private ArrayList<Memo> lData3 = null;
+    private ArrayList<Memo> lData = null;
     private Context mContext;
     private ExpandableListView list_memo;
     private ImageButton imagebotton_slide;
@@ -65,13 +63,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final DBManager mgr = new DBManager(this);
-<<<<<<< HEAD
-=======
-//        Memo memo=new Memo("开心的要命",
-//                "2018-11-30 23:00:00",2,0,0,
-//                0, 1,1,1,"：）");
-//        mgr.insert_Memo(memo);
->>>>>>> f61b24faca3c87880330127b12d0ac434d2e159f
 
         mContext = MainActivity.this;
 
@@ -91,17 +82,17 @@ public class MainActivity extends AppCompatActivity {
         gData.add(new Group_new("超时未完成",-1));
         gData.add(new Group_new("已完成任务",0));
 
-        lData1 = new ArrayList<Memo>();
-        lData1 = mgr.returnmemo2(1);
-        iData.add(lData1);
+        lData = new ArrayList<Memo>();
+        lData = mgr.returnmemo2(1);
+        iData.add(lData);
 
-        lData2 = new ArrayList<Memo>();
-        lData2 = mgr.returnmemo3(1);
-        iData.add(lData2);
+        lData = new ArrayList<Memo>();
+        lData = mgr.returnmemo3(1);
+        iData.add(lData);
 
-        lData3 = new ArrayList<Memo>();
-        lData3 = mgr.returnmemo1(1);
-        iData.add(lData3);
+        lData = new ArrayList<Memo>();
+        lData = mgr.returnmemo1(1);
+        iData.add(lData);
 
         myAdapter = new MyBaseExpandableListAdapter_new(gData,iData,mContext);
         list_memo.setAdapter(myAdapter);
@@ -130,13 +121,36 @@ public class MainActivity extends AppCompatActivity {
             public void onGroupExpand(int groupPosition) {
                 List<Integer>dele=new ArrayList<Integer>();
                 dele = myAdapter.getGroup(groupPosition);
-                mgr.deletedone(dele);
                 for(int i=0;i<dele.size();i++)
                 {
                     int id=dele.get(i);
                     Memo memo=mgr.returnamemo(id);
-                    mgr.insert_Memo(memo);
+                    Log.e("colomncolomn",String.valueOf(id));
+                    String tmp_time=memo.getmemo_dtimestring();
+                    if(tmp_time=="")
+                    {
+                        tmp_time="9999-12-01 12:12:12";
+                    }
+//                    Log.e("colomncolomn",memo.getMemo_title());
+//                    Log.e("colomncolomn",memo.getmemo_dtimestring());
+//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_priority()));
+//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_periodicity()));
+//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_advanced()));
+//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_remind()));
+//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_paper()));
+//                    Log.e("colomncolomn",String.valueOf(memo.getUser_id()));
+//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_periodicity()));
+//                    Memo tmp_memo = new Memo(memo.getMemo_title(),
+//                            tmp_time,memo.getMemo_priority(),memo.getMemo_periodicity(),memo.getMemo_advanced(),
+//                            memo.getMemo_remind(), memo.getMemo_paper(),memo.getUser_id(),1,"：）");
+                    Memo tmp_memo = new Memo(memo.getMemo_title(),
+                            "9999-12-01 12:12:12",1,0,0,
+                            0, 1,1,1,"：）");
+                    Log.e("insertinsert","insertinsert");
+                    System.out.println(memo.getmemo_dtimestring());
+                    mgr.insert_Memo(tmp_memo);
                 }
+                mgr.deletedone(dele);
             }
         });
 
@@ -164,15 +178,8 @@ public class MainActivity extends AppCompatActivity {
                                 0, 1,1,0,"：）");
                         Log.e("insert","insert");
                         mgr.insert_Memo(memo);
-<<<<<<< HEAD
                         iData.get(0).add(memo);
                         myAdapter.notifyDataSetChanged();
-=======
-                        iData.get(1).add(memo);
-                        myAdapter.notifyDataSetChanged();
-//                        Intent self = new Intent(MainActivity.this,MainActivity.class);
-//                        startActivity(self);
->>>>>>> f61b24faca3c87880330127b12d0ac434d2e159f
                     }
                 });
                 speechBottomSheetDialog.show(getSupportFragmentManager(), TAG);
@@ -201,10 +208,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(String title) {
                         //填充到输入框中
-<<<<<<< HEAD
-=======
-//                        mResultTv.setText(title);
->>>>>>> f61b24faca3c87880330127b12d0ac434d2e159f
                     }
                 });
                 speechBottomSheetDialog.show(getSupportFragmentManager(), TAG);

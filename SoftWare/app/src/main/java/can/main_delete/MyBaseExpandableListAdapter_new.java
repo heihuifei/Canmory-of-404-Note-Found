@@ -197,6 +197,7 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
                     System.out.println(memo.getMemo_title());
                     iData.get(index1).remove(index2);
                     System.out.println("将该子项从该列表移除");
+                    System.out.println(memo.getMemo_id());
                     list.add(memo.getMemo_id());
                     notifyDataSetChanged();
                 }

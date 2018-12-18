@@ -135,20 +135,11 @@ public class Delete extends AppCompatActivity {
                         System.out.println(tmp2);
                     }
                 }
-<<<<<<< HEAD
                 //删除直接删除该用户id的所有已完成备忘录的列表
                 mgr.deletedone(1);
                 Intent self = new Intent(Delete.this,Delete.class);
                 startActivity(self);
-=======
-                mgr.deletedone(list);
-                iData.get(2);
->>>>>>> f61b24faca3c87880330127b12d0ac434d2e159f
                 myAdapter.notifyDataSetChanged();
-//                Intent self = new Intent(Delete.this,Delete.class);
-//                startActivity(self);
-                Log.e("kkkkkkkkkk","kkkkkkkkkk");
-
             }
         });
         delete_botton_back.setOnClickListener(new View.OnClickListener() {
