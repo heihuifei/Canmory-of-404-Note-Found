@@ -58,19 +58,19 @@
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/delete" />
-
+            android:background="@drawable/ali_delete" />
         <Button
             android:id="@+id/btn_openSpeechDialog"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="180dp"
-            android:background="@drawable/speak"/>
+            android:background="@drawable/ali_speak"/>
         <ImageButton
             android:id="@+id/imageButton_add"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/add"/>
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ali_add"/>
     </LinearLayout>
 </RelativeLayout>
 

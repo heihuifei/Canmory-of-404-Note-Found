@@ -1,7 +1,10 @@
 package can.main_delete;
 
+import can.aboutsqlite.DBManager;
 import can.aboutsqlite.Memo;
 import can.memorycan.R;
+import can.memorycan.memo_add.list_View.Group;
+import can.memorycan.memo_add.list_View.MyBaseExpandableListAdapter;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 import android.widget.CompoundButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Jay on 2015/9/25 0025.
@@ -26,11 +31,35 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
     private ArrayList<Group_new> gData;
     private ArrayList<ArrayList<Memo>> iData;
     private Context mContext;
+    private static HashMap<Integer,Boolean> isSelected0;
+    private static HashMap<Integer,Boolean> isSelected1;
+    private static HashMap<Integer,Boolean> isSelected2;
+    private List<Integer>list;
 
-    public MyBaseExpandableListAdapter_new(ArrayList<Group_new> gData,ArrayList<ArrayList<Memo>> iData, Context mContext) {
+    public MyBaseExpandableListAdapter_new(ArrayList<Group_new> gData, ArrayList<ArrayList<Memo>> iData, Context mContext) {
         this.gData = gData;
         this.iData = iData;
         this.mContext = mContext;
+        isSelected0 = new HashMap<Integer, Boolean>();
+        isSelected1 = new HashMap<Integer, Boolean>();
+        isSelected2 = new HashMap<Integer, Boolean>();
+        list = new ArrayList<>();
+        initDate();
+    }
+
+    private void initDate(){
+        for(int i=0;i<iData.get(0).size();i++)
+        {
+            getIsSelected0().put(i,false);
+        }
+        for(int i=0;i<iData.get(1).size();i++)
+        {
+            getIsSelected1().put(i,false);
+        }
+        for(int i=0;i<iData.get(2).size();i++)
+        {
+            getIsSelected2().put(i,false);
+        }
     }
 
     @Override
@@ -44,8 +73,8 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Group_new getGroup(int groupPosition) {
-        return gData.get(groupPosition);
+    public List<Integer> getGroup(int groupPosition) {
+        return list;
     }
 
     @Override
@@ -63,11 +92,31 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
         return childPosition;
     }
 
-    public void change_gData(ArrayList<Group_new> group)
-    {
-        gData = group;
-        notifyDataSetChanged();
+    public static HashMap<Integer,Boolean> getIsSelected0() {
+        return isSelected0;
     }
+    public static HashMap<Integer,Boolean> getIsSelected1() {
+        return isSelected1;
+    }
+    public static HashMap<Integer,Boolean> getIsSelected2() {
+        return isSelected2;
+    }
+
+    public static void setIsSelected0(HashMap<Integer,Boolean> isSelected0) {
+        MyBaseExpandableListAdapter_new.isSelected0 = isSelected0;
+    }
+    public static void setIsSelected1(HashMap<Integer,Boolean> isSelected1) {
+        MyBaseExpandableListAdapter_new.isSelected1 = isSelected1;
+    }
+    public static void setIsSelected2(HashMap<Integer,Boolean> isSelected2) {
+        MyBaseExpandableListAdapter_new.isSelected2 = isSelected2;
+    }
+
+//    public void change_gData(ArrayList<Group_new> group)
+//    {
+//        gData = group;
+//        notifyDataSetChanged();
+//    }
 
     public void change_iData(ArrayList<ArrayList<Memo>> item)
     {
@@ -94,6 +143,7 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
         }else{
             groupHolder = (ViewHolderGroup) convertView.getTag();
         }
+
         groupHolder.tv_group_name.setText(gData.get(groupPosition).get_Group_name());
         return convertView;
     }
@@ -106,14 +156,14 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
         ViewHolderItem itemHolder;
         convertView = null;
         if(convertView == null){
-            Log.e("groupposition",String.valueOf(convertView));
+//            Log.e("groupposition",String.valueOf(convertView));
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.item_exlist_item_new, parent, false);
             itemHolder = new ViewHolderItem();
             itemHolder.ckb_name = (CheckBox) convertView.findViewById(R.id.ckb_name_new);
             itemHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name_new);
-            if(groupPosition == 2 && gData.get(groupPosition).get_memo_done()==0 && iData.get(groupPosition).get(childPosition).getMemo_id() > 100) {
-                Log.e("groupposition",String.valueOf(groupPosition));
+            if(groupPosition == 2) {
+                Log.e("grouppositiongroupposit",String.valueOf(groupPosition));
                 itemHolder.ckb_name.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             }
             convertView.setTag(itemHolder);
@@ -124,9 +174,44 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
         }
 //        itemHolder.ckb_name.setOnCheckedChangeListener(null);
 //        itemHolder.ckb_name.setChecked(iData.get(groupPosition).get(childPosition).getCheckStatus());
+//        if(groupPosition==0)
+//        {
+//            itemHolder.ckb_name.setChecked(getIsSelected0().get(childPosition));
+//        }
+//        else if(groupPosition==1)
+//        {
+//            itemHolder.ckb_name.setChecked(getIsSelected1().get(childPosition));
+//        }
+//        else if(groupPosition==2)
+//        {
+//            itemHolder.ckb_name.setChecked(getIsSelected2().get(childPosition));
+//        }
+        itemHolder.ckb_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    Memo memo=iData.get(index1).get(index2);
+                    System.out.println(memo.getMemo_id());
+                    iData.get(2).add(memo);
+                    System.out.println(memo.getMemo_title());
+                    iData.get(index1).remove(index2);
+                    System.out.println("将该子项从该列表移除");
+                    System.out.println(memo.getMemo_id());
+                    list.add(memo.getMemo_id());
+                    notifyDataSetChanged();
+                }
+            }
+        });
         itemHolder.ckb_name.setText(iData.get(index1).get(index2).getMemo_title());
-        itemHolder.tv_name.setText(String.valueOf(iData.get(index1).get(index2).getmemo_dtimestring()));
+        Log.e("title_strings",iData.get(index1).get(index2).getMemo_title());
+        String tmp=iData.get(index1).get(index2).getmemo_dtimestring();
+        itemHolder.tv_name.setText(tmp);
         return convertView;
+    }
+    public void Chan_mgr(DBManager mgr)
+    {
+
     }
 
 //    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
@@ -142,16 +227,6 @@ public class MyBaseExpandableListAdapter_new extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-
-
-//    public void add(Item item)
-//    {
-//        if(iData == null)
-//        {
-//            iData=new ArrayList<>();
-//        }
-//        iData.add(item);
-//    }
 
     private static class ViewHolderGroup{
         private TextView tv_group_name;

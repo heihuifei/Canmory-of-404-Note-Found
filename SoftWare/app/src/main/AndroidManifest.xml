@@ -29,15 +29,36 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name="can.sms.Appcontext"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/lunch"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".memo_add.memo_add" />
+        <activity
+            android:name="can.guide_pages.SplashActivity"
+            android:label="@string/app_name"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="can.guide_pages.WelcomeGuideActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+
+            />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -46,13 +67,9 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name="can.weather.Weather" />
-        <activity android:name="can.main_delete.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="can.main_delete.MainActivity"></activity>
+
         <activity android:name="can.memo_add_details.memo_add_details" />
         <activity android:name=".setting.setting" />
 
@@ -112,12 +129,22 @@
 
         <receiver android:name="can.live_assitcance.AutoUpdateReceiver" />
 
+
         <service
             android:name="can.live_assitcance.AppUsedService"
             android:enabled="true"
             android:exported="true"></service>
         <receiver android:name="can.live_assitcance.AutoUpdateReceiver0" />
 
+
+        <activity
+            android:name="can.login.LoginActivity"
+            android:label="@string/title_activity_login">
+
+        </activity>
+        <activity
+            android:name="can.login.SignupActivity"
+            android:label="@string/title_activity_signup" />
     </application>
 
 </manifest>

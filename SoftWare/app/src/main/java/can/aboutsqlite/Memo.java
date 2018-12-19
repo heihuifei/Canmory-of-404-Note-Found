@@ -139,8 +139,6 @@ public class Memo {
             this.memo_dtime=format.format(date);
     }
 
-
-
     /*memo_priority*/
     public int getMemo_priority() {
         return memo_priority;

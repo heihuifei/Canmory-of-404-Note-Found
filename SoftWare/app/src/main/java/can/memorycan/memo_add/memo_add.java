@@ -92,8 +92,7 @@ public class memo_add extends AppCompatActivity{
         Intent it=getIntent();
         Bundle bd=it.getExtras();
         n=bd.getInt("memo_id");
-
-        
+        System.out.println(n);
 
         user_id=1;
         memo_done=0;
@@ -101,13 +100,12 @@ public class memo_add extends AppCompatActivity{
 
         editMemoTitle=findViewById(R.id.memo_add_title);
         //   editMemoTitle.setOnClickListener(new class_addTitle());
-        if(n!=1){
+        if(n!=-1){
             temp_memo=mgr.returnamemo(n);
             editMemoTitle.setText(temp_memo.getMemo_title());
+            System.out.println(temp_memo.getMemo_title());
             memo_content=temp_memo.getMemo_content();
-
         }
-
 
         currentDate = (TextView) findViewById(R.id.currentDate);
         currentTime = (TextView) findViewById(R.id.currentTime);
