@@ -19,16 +19,18 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="13dp"
-            android:background="@drawable/ali_back" />
+            android:background="#fff"
+            android:src="@android:drawable/ic_menu_revert" />
+
         <TextView
             android:id="@+id/textView_wallpaper"
-            android:layout_width="82dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignTop="@+id/imageButton_back"
-            android:text="壁纸生成"
-            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="13dp"
-            android:layout_marginLeft="20dp"/>
+            android:text="壁纸生成"
+            android:textSize="20sp" />
         <Button
             android:id="@+id/imageButton_preview"
             android:layout_width="60dp"

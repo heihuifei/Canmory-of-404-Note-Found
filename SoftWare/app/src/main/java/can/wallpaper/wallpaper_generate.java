@@ -67,7 +67,7 @@ public class wallpaper_generate extends AppCompatActivity {
                 // 将所选mySpinner 的值带入myTextView 中
 
                 String temp_string=sp2.getSelectedItem().toString();
-                if(temp_string.equals("红")){
+                if(temp_string.equals("白")){
                     temp_sp[1]=0;
                 }
                 else if(temp_string.equals("绿")){
@@ -79,6 +79,22 @@ public class wallpaper_generate extends AppCompatActivity {
                 else if(temp_string.equals("黑"))
                 {
                     temp_sp[1]=3;
+                }
+                else if(temp_string.equals("橙"))
+                {
+                    temp_sp[1]=4;
+                }
+                else if(temp_string.equals("粉"))
+                {
+                    temp_sp[1]=5;
+                }
+                else if(temp_string.equals("紫"))
+                {
+                    temp_sp[1]=6;
+                }
+                else if(temp_string.equals("黄"))
+                {
+                    temp_sp[1]=7;
                 }
             }
 

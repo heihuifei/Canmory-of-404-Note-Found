@@ -18,6 +18,12 @@ public class select_wallpaper extends AppCompatActivity {
     private ImageView imageView4;
     private ImageView imageView5;
     private ImageView imageView6;
+    private ImageView imageView7;
+    private ImageView imageView8;
+    private ImageView imageView9;
+    private ImageView imageView10;
+    private ImageView imageView11;
+    private ImageView imageView12;
     private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,12 @@ public class select_wallpaper extends AppCompatActivity {
         imageView4=(ImageView)findViewById(R.id.imageView4) ;
         imageView5=(ImageView)findViewById(R.id.imageView5) ;
         imageView6=(ImageView)findViewById(R.id.imageView6) ;
+        imageView7=(ImageView)findViewById(R.id.imageView7) ;
+        imageView8=(ImageView)findViewById(R.id.imageView8) ;
+        imageView9=(ImageView)findViewById(R.id.imageView9) ;
+        imageView10=(ImageView)findViewById(R.id.imageView10) ;
+        imageView11=(ImageView)findViewById(R.id.imageView11) ;
+        imageView12=(ImageView)findViewById(R.id.imageView12) ;
         button.setOnClickListener(new WallGenerate());
         imageView1.setOnClickListener(new OnClickListener1());
         imageView2.setOnClickListener(new OnClickListener2());
@@ -37,6 +49,12 @@ public class select_wallpaper extends AppCompatActivity {
         imageView4.setOnClickListener(new OnClickListener4());
         imageView5.setOnClickListener(new OnClickListener5());
         imageView6.setOnClickListener(new OnClickListener6());
+        imageView7.setOnClickListener(new OnClickListener7());
+        imageView8.setOnClickListener(new OnClickListener8());
+        imageView9.setOnClickListener(new OnClickListener9());
+        imageView10.setOnClickListener(new OnClickListener10());
+        imageView11.setOnClickListener(new OnClickListener11());
+        imageView12.setOnClickListener(new OnClickListener12());
     }
     private class WallGenerate implements View.OnClickListener{
         @Override
@@ -106,7 +124,60 @@ public class select_wallpaper extends AppCompatActivity {
             bd.putInt("id",6);
             intent.putExtras(bd);
             startActivity(intent);
-
+        }
+    }
+    private class OnClickListener7 implements View.OnClickListener{
+        public void onClick(View v) {
+            Intent intent = new Intent(select_wallpaper.this,wallpaper_generate.class);
+            Bundle bd=new Bundle();
+            bd.putInt("id",7);
+            intent.putExtras(bd);
+            startActivity(intent);
+        }
+    }
+    private class OnClickListener8 implements View.OnClickListener{
+        public void onClick(View v) {
+            Intent intent = new Intent(select_wallpaper.this,wallpaper_generate.class);
+            Bundle bd=new Bundle();
+            bd.putInt("id",8);
+            intent.putExtras(bd);
+            startActivity(intent);
+        }
+    }
+    private class OnClickListener9 implements View.OnClickListener{
+        public void onClick(View v) {
+            Intent intent = new Intent(select_wallpaper.this,wallpaper_generate.class);
+            Bundle bd=new Bundle();
+            bd.putInt("id",9);
+            intent.putExtras(bd);
+            startActivity(intent);
+        }
+    }
+    private class OnClickListener10 implements View.OnClickListener{
+        public void onClick(View v) {
+            Intent intent = new Intent(select_wallpaper.this,wallpaper_generate.class);
+            Bundle bd=new Bundle();
+            bd.putInt("id",10);
+            intent.putExtras(bd);
+            startActivity(intent);
+        }
+    }
+    private class OnClickListener11 implements View.OnClickListener{
+        public void onClick(View v) {
+            Intent intent = new Intent(select_wallpaper.this,wallpaper_generate.class);
+            Bundle bd=new Bundle();
+            bd.putInt("id",11);
+            intent.putExtras(bd);
+            startActivity(intent);
+        }
+    }
+    private class OnClickListener12 implements View.OnClickListener{
+        public void onClick(View v) {
+            Intent intent = new Intent(select_wallpaper.this,wallpaper_generate.class);
+            Bundle bd=new Bundle();
+            bd.putInt("id",12);
+            intent.putExtras(bd);
+            startActivity(intent);
         }
     }
 }
