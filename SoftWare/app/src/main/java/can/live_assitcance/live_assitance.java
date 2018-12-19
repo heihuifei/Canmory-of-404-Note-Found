@@ -618,7 +618,7 @@ public class live_assitance extends AppCompatActivity {
                 JSONObject object1 = object.getJSONArray("HeWeather6").getJSONObject(0);
                 JSONObject now = object1.getJSONObject("now");
                 JSONObject lifestyle = object1.getJSONArray("lifestyle").getJSONObject(1);
-                String tianqi = now.getString("cond_txt");
+                String tianqi = now.optString("cond_txt");
                 String advice = lifestyle.getString("txt");
 
                 System.out.println("天气："+tianqi);
