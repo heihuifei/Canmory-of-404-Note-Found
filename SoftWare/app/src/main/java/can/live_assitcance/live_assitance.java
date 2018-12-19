@@ -79,7 +79,7 @@ public class live_assitance extends AppCompatActivity {
     private String appName;
     private Long totalTime;
     private Integer launchTime;
-    private String contentText;
+    private static String contentText;
     private static final int K = 3;
     private Switch  sw1,sw2,sw3,sw4,sw5,sw6,sw7;//天气预报按钮sw5，智能分析按钮sw7
     private Switch sw8;//悬浮窗
@@ -644,7 +644,7 @@ public class live_assitance extends AppCompatActivity {
 
     //智能提醒功能模块
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void runAppUsed(){
+    void runAppUsed(){
         if (isNoOption()){//判断是否有"有权查看使用情况的应用程序"这个选项
             while(true){
                 if (isNoSwitch()){//判断"有权查看使用情况的应用程序"选项的打开状态
@@ -791,45 +791,6 @@ public class live_assitance extends AppCompatActivity {
         return true;
     }
 
-    //消息发送到通知栏
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void sendNotify(String contentText){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //创建通知渠道
-            CharSequence name = "MenoCan";
-            String description = "AppUsed";
-            String channelId="channelId1";//渠道id
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;//重要性级别
-            NotificationChannel mChannel = new NotificationChannel(channelId, name, importance);
-            mChannel.setDescription(description);//渠道描述
-            mChannel.enableLights(true);//是否显示通知指示灯
-            mChannel.enableVibration(true);//是否振动
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(mChannel);//创建通知渠道
-            //第二个参数与channelId对应
-            Notification.Builder builder = new Notification.Builder(live_assitance.this,channelId);
-            //icon title text必须包含，不然影响桌面图标小红点的展示
-            builder.setSmallIcon(android.R.drawable.stat_notify_chat)
-                    .setContentTitle("用户最近两周使用app情况")
-                    .setContentText(contentText)
-                    .setNumber(3); //久按桌面图标时允许的此条通知的数量
-            //            Intent intent= new Intent(this,NotificationActivity.class);
-            //            PendingIntent ClickPending = PendingIntent.getActivity(this, 0, intent, 0);
-            //            builder.setContentIntent(ClickPending);
-            notificationManager.notify(1,builder.build());
-            //            Notification notify = builder.build();
-        }else{
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            Notification.Builder builder = new Notification.Builder(live_assitance.this);
-            //icon title text必须包含，不然影响桌面图标小红点的展示
-            builder.setSmallIcon(android.R.drawable.stat_notify_chat)
-                    .setContentTitle("用户最近两周使用app情况")
-                    .setContentText(contentText)
-                    .setNumber(3); //久按桌面图标时允许的此条通知的数量
-            notificationManager.notify(2,builder.build());
-        }
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private static boolean isNotificationEnabled(Context context) {
 
@@ -880,9 +841,11 @@ public class live_assitance extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void runSendNotify(String contentText){
+    void runSendNotify(String contentText){
         if (isNotificationEnabled(this)){
-            sendNotify(contentText);
+//            sendNotify(contentText);
+            Intent intent = new Intent(live_assitance.this, AppUsedService.class);
+            startService(intent);
         }else{
             Toast.makeText(live_assitance.this,"请打开通知栏的权限，否则无法实现通知功能",Toast.LENGTH_LONG).show();
             goToSet();
@@ -893,8 +856,9 @@ public class live_assitance extends AppCompatActivity {
     public static String getAPI(){
         return API;
     }
-
     public static String getCityName(){
         return  cityName;
     }
+    public static String getContentText(){return contentText;}
+    public static int getK(){return K;}
 }
