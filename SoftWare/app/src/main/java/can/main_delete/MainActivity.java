@@ -3,35 +3,43 @@ package can.main_delete;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
 import com.example.baiduspeechdialog.dialog.SpeechBottomSheetDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import can.aboutsqlite.DBManager;
 import can.aboutsqlite.Memo;
 import can.aboutsqlite.User;
+import can.live_assitcance.live_assitance;
 import can.memorycan.R;
 import can.memorycan.memo_add.memo_add;
 import can.memorycan.speech;
+import can.sms.HelloService;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    int wstate = 1;
     private static final String TAG = speech.class.getSimpleName();
     private Button mOpenSpeechDialogBtn;
     private TextView mResultTv;
@@ -46,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imagebotton_add,igb_to_slider;
     private MyBaseExpandableListAdapter_new myAdapter = null;
     private Handler handle = new Handler();
+    private User user;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         final DBManager mgr = new DBManager(this);
 
@@ -106,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
         list_memo.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                List<Integer> list = new ArrayList();
                 detail.putExtra("memo_id",iData.get(groupPosition).get(childPosition).getMemo_id());
-                Log.e("title_strings",iData.get(groupPosition).get(childPosition).getMemo_title());
+                Log.e("memo_id",String.valueOf(iData.get(groupPosition).get(childPosition).getMemo_id()));
+                Log.e("KKKKKKLLLLLLLGGGGGG","KKKGGGFFFFF");
                 Bundle bundle = new Bundle();
                 bundle.putString("test","false");
                 detail.putExtras(bundle);
@@ -116,48 +126,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        list_memo.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                List<Integer>dele=new ArrayList<Integer>();
-                dele = myAdapter.getGroup(groupPosition);
-                for(int i=0;i<dele.size();i++)
-                {
-                    int id=dele.get(i);
-                    Memo memo=mgr.returnamemo(id);
-                    Log.e("colomncolomn",String.valueOf(id));
-                    String tmp_time=memo.getmemo_dtimestring();
-                    if(tmp_time=="")
-                    {
-                        tmp_time="9999-12-01 12:12:12";
-                    }
-//                    Log.e("colomncolomn",memo.getMemo_title());
-//                    Log.e("colomncolomn",memo.getmemo_dtimestring());
-//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_priority()));
-//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_periodicity()));
-//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_advanced()));
-//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_remind()));
-//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_paper()));
-//                    Log.e("colomncolomn",String.valueOf(memo.getUser_id()));
-//                    Log.e("colomncolomn",String.valueOf(memo.getMemo_periodicity()));
-//                    Memo tmp_memo = new Memo(memo.getMemo_title(),
-//                            tmp_time,memo.getMemo_priority(),memo.getMemo_periodicity(),memo.getMemo_advanced(),
-//                            memo.getMemo_remind(), memo.getMemo_paper(),memo.getUser_id(),1,"：）");
-                    Memo tmp_memo = new Memo(memo.getMemo_title(),
-                            "9999-12-01 12:12:12",1,0,0,
-                            0, 1,1,1,"：）");
-                    Log.e("insertinsert","insertinsert");
-                    System.out.println(memo.getmemo_dtimestring());
-                    mgr.insert_Memo(tmp_memo);
-                }
-                mgr.deletedone(dele);
-            }
-        });
-
         imagebotton_delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view)
             {
+                Log.e("kkkkkkkkkk","kkkkkkkkkk");
                 startActivity(delete);
+                Log.e("kkkkkkkkkk","kkkkkkkkkk");
             }
         });
         onePermission();
@@ -178,15 +152,33 @@ public class MainActivity extends AppCompatActivity {
                                 0, 1,1,0,"：）");
                         Log.e("insert","insert");
                         mgr.insert_Memo(memo);
-                        iData.get(0).add(memo);
-                        myAdapter.notifyDataSetChanged();
+                        Intent self = new Intent(MainActivity.this,MainActivity.class);
+                        startActivity(self);
                     }
                 });
                 speechBottomSheetDialog.show(getSupportFragmentManager(), TAG);
             }
         });
-//        handle.postDelayed(runnable,1000*5);
+        handle.postDelayed(runnable,1000*5);
+
+        if (Settings.canDrawOverlays(MainActivity.this)) {
+            if(wstate == 1){
+                Intent intent = new Intent(MainActivity.this,MainService.class);
+                //Toast.makeText(MainActivity.this,"试图开启Toucher",Toast.LENGTH_SHORT).show();
+                startService(intent);
+            }
+            else{
+                Intent intent = new Intent(MainActivity.this,MainService.class);
+                //Toast.makeText(MainActivity.this,"试图关闭Toucher",Toast.LENGTH_SHORT).show();
+                startService(intent);
+            }
+        }else { //若没有权限，提示获取.
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+            Toast.makeText(MainActivity.this,"需要取得权限以使用悬浮窗",Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        }
     }
+
     protected void onDestroy(){
         handle.removeCallbacks(runnable);
         super.onDestroy();
@@ -208,6 +200,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(String title) {
                         //填充到输入框中
+//                        mResultTv.setText(title);
+                        Memo memo = new Memo(title,
+                                "2018-11-14 23:00:00",2,0,0,
+                                0, 1,1,0,"：）");
                     }
                 });
                 speechBottomSheetDialog.show(getSupportFragmentManager(), TAG);
@@ -215,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**只有一个运行时权限申请的情况*/
+    /*只有一个运行时权限申请的情况*/
     private void onePermission(){
         RxPermissions rxPermissions = new RxPermissions(MainActivity.this); // where this is an Activity instance
         rxPermissions.request(Manifest.permission.RECORD_AUDIO,
