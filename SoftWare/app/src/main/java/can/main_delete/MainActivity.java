@@ -39,7 +39,7 @@ import io.reactivex.functions.Consumer;
 
 
 public class MainActivity extends AppCompatActivity {
-    int wstate = 1;
+    int wstate = 0,usetime=0;
     private static final String TAG = speech.class.getSimpleName();
     private Button mOpenSpeechDialogBtn;
     private TextView mResultTv;
@@ -161,7 +161,24 @@ public class MainActivity extends AppCompatActivity {
         });
         handle.postDelayed(runnable,1000*5);
 
-        if (Settings.canDrawOverlays(MainActivity.this)) {
+        if(wstate==1){
+            if (Settings.canDrawOverlays(MainActivity.this)) {
+                usetime=1;
+                    Intent intent = new Intent(MainActivity.this,MainService.class);
+                    //Toast.makeText(MainActivity.this,"试图开启Toucher",Toast.LENGTH_SHORT).show();
+                    startService(intent);
+            }else { //若没有权限，提示获取.
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                Toast.makeText(MainActivity.this,"需要取得权限以使用悬浮窗",Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        }
+        else if(wstate==0&&usetime==1){
+            Intent intent = new Intent(MainActivity.this,MainService.class);
+            //Toast.makeText(MainActivity.this,"试图关闭Toucher",Toast.LENGTH_SHORT).show();
+            startService(intent);
+        }
+        /*if (Settings.canDrawOverlays(MainActivity.this)) {
             if(wstate == 1){
                 Intent intent = new Intent(MainActivity.this,MainService.class);
                 //Toast.makeText(MainActivity.this,"试图开启Toucher",Toast.LENGTH_SHORT).show();
@@ -176,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
             Toast.makeText(MainActivity.this,"需要取得权限以使用悬浮窗",Toast.LENGTH_SHORT).show();
             startActivity(intent);
-        }
+        }*/
+
+
     }
 
     protected void onDestroy(){
